@@ -1,0 +1,38 @@
+[
+  {
+    "Id": 1,
+    "Address": "Maglegårdsvej 2",
+    "Zone": 0,
+    "SpeedLimit": 50
+  },
+  {
+    "Id": 2,
+    "Address": "Hillerødmotorvejen 123",
+    "Zone": 1,
+    "SpeedLimit": 110
+  },
+  {
+    "Id": 3,
+    "Address": "Frederiksborgvej 537",
+    "Zone": 1,
+    "SpeedLimit": 90
+  },
+  {
+    "Id": 11,
+    "Address": "Maglegårdsvej 3",
+    "Zone": 0,
+    "SpeedLimit": 50
+  },
+  {
+    "Id": 34,
+    "Address": "Maglegårdsvej 22",
+    "Zone": 2,
+    "SpeedLimit": 80
+  },
+  {
+    "Id": 76,
+    "Address": "Maglegårdsvej 24",
+    "Zone": 2,
+    "SpeedLimit": 110
+  }
+]

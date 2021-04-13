@@ -1,0 +1,70 @@
+﻿@page
+@using SpeedMeasuremetRazor.Helpers
+@model SpeedMeasuremetRazor.Pages.Locations.IndexModel
+@{
+    ViewData["Title"] = "Locations";
+}
+
+
+<h1>List of location</h1>
+<p>
+    @*Numbers of locations : @Model.locationrepo.GetAllLocations().Count*@
+    Numbers of locations : @Model.locationrepo.GetAllLocationsAsync().Result.Count
+</p>
+<div>
+
+    <form method="post" asp-page-handler="FilterSort">
+        <p>
+            Search:
+            <input type="text" asp-for="Criteria" />
+            @*<input asp-for="@Model.DateFrom" asp-for="DateFrom" />
+        <input asp-for="@Model.DateTo" asp-for="DateTo" />*@
+            <br /><br />
+            <select asp-for="@Model.LocationSortCriteria" asp-items="Html.GetEnumSelectList<LocationSort>()" class="form-control">
+                <option value="">Vælg sortering</option>
+            </select>
+            <br />
+            <input type="submit" value="Filter and sort" />
+        </p>
+    </form>
+
+</div>
+@*<form method="post" asp-page-handler="Sort">
+    <select asp-for="@Model.LocationSortCriteria" asp-items="Html.GetEnumSelectList<LocationSort>()" class="form-control">
+        <option value="">Vælg sortering</option>
+    </select>
+    <br />
+    <input class="btn btn-primary" type="submit" value="Sorter" />
+</form>*@
+<br/>
+    <p>
+        <a asp-page="CreateLocation">Create New</a>
+    </p>
+    <form method="post">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Address</th>
+                    <th>Zone</th>
+                    <th>SpeedLimit</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @*@foreach (var item in Model.locationrepo.GetAllLocations())*@
+                @foreach (var item in @Model.Locations)
+                {
+                    <tr>
+                        <td> @item.Id</td>
+                        <td> @item.Address</td>
+                        <td> @item.Zone</td>
+                        <td> @item.SpeedLimit</td>
+
+                        <td><a asp-page="EditLocation" asp-route-id="@item.Id">Edit and delete</a></td>
+                    </tr>
+
+                }
+            </tbody>
+        </table>
+    </form>

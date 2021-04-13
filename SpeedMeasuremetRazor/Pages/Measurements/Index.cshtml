@@ -1,0 +1,81 @@
+﻿@page
+@using SpeedMeasuremetRazor.Models
+@model SpeedMeasuremetRazor.Pages.Measurements.IndexModel
+@{
+    ViewData["Title"] = "SpeedMeasurements";
+}
+
+<h1>List of speedmeasrements</h1>
+<p>
+    Numbers of registrations : @Model.repo.GetAllSpeedMeasurements().Count
+</p>
+<p>
+    <a asp-page="CreateSpeedMeasurement">Create measurement</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>All</th>
+            <th>Over speed limit</th>
+            <th>CutInLicense</th>
+            <th>ConditionalRevocation</th>
+            <th>UnConditionalRevocation</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td> @Model.repo.GetAllSpeedMeasurements().Count</td>
+            @*<td> @Model.repo.OverSpeedLimitMeasurements.Count</td>*@
+            @*<td> @Model.repo.CutInLicenseMeasurements.Count</td>
+            <td> @Model.repo.ConditionalRevocationMeasurements.Count</td>*@
+            <td>Missing ...</td>
+        </tr>
+    </tbody>
+</table>
+<form method="get">
+    <div class="form-group">
+        <label>Offense</label>
+        <select asp-for="@Model.OffenseString" asp-items="Html.GetEnumSelectList<Offense>()" class="form-control">
+            <option value="All">All</option>
+        </select>
+    </div>
+    <div class="form-group">
+
+        <input type="submit" value="Filter" class="btn btn-primary" />
+    </div>
+</form>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>SpeedMeasurement Id</th>
+                <th>Speed registred</th>
+                <th>Timestamp</th>
+                <th>Address</th>
+                <th>Zone</th>
+                <th>SpeedLimit</th>
+                <th>Foto</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.MeasurementToList)
+            {
+                <tr>
+                    <td> @item.Id</td>
+                    <td> @item.Speed</td>
+                    <td> @item.TimeStamp</td>
+                    <td> @item.Location.Address</td>
+                    <td> @item.Location.Zone</td>
+                    <td> @item.Location.SpeedLimit</td>
+                    <td> <img src="~/Images/@item.ImageName" width="60" height="70"> </td>
+                    <td>
+                        <form method="post">
+                            <button asp-page-handler="Delete" asp-route-id="@item.Id"
+                                    class="btn btn-danger btn-group-lg pull-right">
+                                Delete
+                            </button>
+                        </form>
+                    <td>
+                </tr>
+            }
+        </tbody>
+    </table>
